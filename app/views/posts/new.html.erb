@@ -1,0 +1,11 @@
+<h1>Say Something</h1>
+
+<%= form_for(:post, url: posts_create_path) do |f| %>
+
+  <%= f.label :text %>
+  <%= f.text_area :text %>
+
+  <%= f.submit "Save your post" %>
+<% end %>
+
+<%= render 'shared/footer' %>
