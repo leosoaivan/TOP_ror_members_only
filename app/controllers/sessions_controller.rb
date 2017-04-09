@@ -1,16 +1,12 @@
 class SessionsController < ApplicationController
   
-  def new
-    render :new
-  end
-
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(password: params[:session][:password])
+    if @user && @user.authenticate(params[:session][:password])
       log_in(@user)
-      current_user(@user)
-      
-      redirect_to root_url
+      current_user=(@user)
+
+      redirect_to posts_new_path
     else
       flash[:warning] = 'Invalid email/password combination'
       render :new
