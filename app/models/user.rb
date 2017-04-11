@@ -16,16 +16,16 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
-  def new_token
+  def User.new_token
     SecureRandom.urlsafe_base64
   end
 
-  def new_digest
-    Digest::SHA1.hexdigest(new_token)
+  def User.new_digest(token)
+    Digest::SHA1.hexdigest(token.to_s)
   end
   
   def remember
-    self.remember_token = new_digest
+    self.remember_digest = User.new_digest(User.new_token)
   end
   
 end

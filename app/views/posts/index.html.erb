@@ -1,2 +1,14 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1> The feed </h1>
+
+<% @posts.each do |post| %>
+  <li>
+    <%= post.text + ", by "%>
+    <% if !cookies[:remember_token].nil? %>
+      <%= User.find_by(id: post.user_id).name %>
+    <% else %>
+      <%= "Anonymous" %>
+    <% end %>
+  </li>
+<% end %>
+
+<%= render 'shared/footer' %>
