@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20170408191512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -26,6 +25,8 @@ ActiveRecord::Schema.define(version: 20170408191512) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.string   "remember_token"
+    t.string   "remember_digest"
   end
 
 end
