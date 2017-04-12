@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       log_in(@user)
       current_user=(@user)
 
-      redirect_to posts_new_path
+      redirect_to posts_path
     else
       flash[:danger] = 'Invalid email/password combination'
       render :new
