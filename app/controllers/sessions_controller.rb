@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
       redirect_to posts_new_path
     else
-      flash[:warning] = 'Invalid email/password combination'
+      flash[:danger] = 'Invalid email/password combination'
       render :new
     end
   end

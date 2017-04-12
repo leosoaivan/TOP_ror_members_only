@@ -3,18 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;subset=latin-ext" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+
   </head>
 
   <body>
-    <div class="row">
-      <%= yield %>
+    <div class='row'>
+      <div class='small-10 small-centered medium-6 columns'>
+        <% flash.each do |message_type, message| %>
+          <div class="alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
     </div>
+
+    <%= yield %>
+  
   </body>
 </html>
