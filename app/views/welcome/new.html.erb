@@ -1,3 +1,11 @@
-<h1>MEMBERS ONLY</h1>
+<% content_for :title do %>
+  Members Only
+<% end %>
 
-<%= render 'shared/footer'%>
+<header class="header">
+  <h1 class="headline">Members Only  <small>by LPSV</small></h1>
+  <ul class="header-subnav">
+    <li><%= link_to "Sign In", login_path %></li>
+    <li><%= link_to "Posts", posts_path, class: 'is-active' %></li>
+  </ul>
+</header>
