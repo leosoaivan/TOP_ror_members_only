@@ -1,14 +1,32 @@
-<h1> The feed </h1>
-
-<% @posts.each do |post| %>
-  <li>
-    <%= post.text + ", by "%>
-    <% if !cookies[:remember_token].nil? %>
-      <%= User.find_by(id: post.user_id).name %>
-    <% else %>
-      <%= "Anonymous" %>
-    <% end %>
-  </li>
+<% content_for :title do %>
+  Members Only - Feed
 <% end %>
 
-<%= render 'shared/footer' %>
+<div class='row'>
+  <div class='small-12 small-centered medium-10 columns'>
+    <h1>The Secrets</h1>
+    <table>
+      <thead></thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><b><%= post.text %></b>, by
+              <% if !cookies[:remember_token].nil? %>
+                <%= User.find_by(id: post.user_id).name %>
+              <% else %>
+                <%= "Anonymous" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class='menu-centered'>
+  <ul class='menu'>
+    <li class='button'><%= link_to "New Post", posts_new_path %></li>
+    <li class='button'><%= link_to "Sign out", logout_path, method: 'delete' %></li>
+  </ul>
+</div>

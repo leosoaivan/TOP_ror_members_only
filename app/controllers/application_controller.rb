@@ -21,12 +21,19 @@ class ApplicationController < ActionController::Base
 
   def sign_out
     @current_user = nil
+    cookies.delete :remember_digest
     cookies.delete :remember_token
   end
 
-  def logged_in_user
-    !@current_user.nil?
+  def logged_in?
+    !!@current_user
   end
-  
+
+  def require_login
+    unless logged_in?
+      flash[:danger] = "You must be logged in to access this section"
+      redirect_to login_path
+    end
+  end
   
 end

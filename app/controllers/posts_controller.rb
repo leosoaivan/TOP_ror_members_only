@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :require_login, only: [:new, :create]
 
   def new
     @post = Post.new
@@ -9,10 +9,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to action: "index"
+      redirect_to action: 'index'
     else
-      flash[:warning] = "The text cannot be blank."
-      render :new
+      flash.now[:danger] = @post.errors.full_messages
+      redirect_to action: 'new'
     end
   end
 
