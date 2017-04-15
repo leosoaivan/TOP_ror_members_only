@@ -1,11 +1,15 @@
-<h1>Say Something</h1>
-
-<%= form_for @post do |f| %>
-
-  <%= f.label :text %>
-  <%= f.text_area :text %>
-
-  <%= f.submit "Save your post" %>
+<% content_for :title do %>
+  Members Only - Sign in
 <% end %>
 
-<%= render 'shared/footer' %>
+<div class='row'>
+  <div class='small-10 small-centered medium-8 columns'>
+    <%= form_for @post do |f| %>
+
+      <%= f.label :text, 'You get 255 characters. Don\'t fuck up.' %>
+      <%= f.text_area :text %>
+
+      <%= f.submit "Save your post" %>
+    <% end %>
+  </div>
+</div>

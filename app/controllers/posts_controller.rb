@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    puts current_user
   end
   
   def create
@@ -11,7 +12,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to action: 'index'
     else
-      flash.now[:danger] = @post.errors.full_messages
+      flash[:danger] = custom_error(@post.errors)
       redirect_to action: 'new'
     end
   end
@@ -25,4 +26,13 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:text)
     end
+
+    def custom_error(errors_hash)
+      if errors_hash[:text].join.match?(/blank/)
+        "Write something, idiot."
+      else
+        "You fucked up."
+      end
+    end
+
 end

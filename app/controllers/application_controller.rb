@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
   def current_user
     remember_token = User.new_digest(cookies[:remember_token])
     @current_user ||= User.find_by(remember_digest: remember_token)
-    return nil unless @current_user
-    @current_user
   end
   
   def current_user=(user)
@@ -20,13 +18,15 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    @current_user = nil
-    cookies.delete :remember_digest
-    cookies.delete :remember_token
+    unless current_user.nil?
+      current_user.update_attribute(:remember_digest, nil)
+      cookies.delete(:remember_token)
+      self.current_user = nil
+    end
   end
 
   def logged_in?
-    !!@current_user
+    !current_user.nil?
   end
 
   def require_login
