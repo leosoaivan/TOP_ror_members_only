@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   before_action :require_login, only: [:new, :create]
+  before_action :check_for_cancel, only: [:create]
 
   def new
     @post = Post.new
-    puts current_user
   end
   
   def create
@@ -35,4 +35,10 @@ class PostsController < ApplicationController
       end
     end
 
+    def check_for_cancel
+      if params[:commit] == 'Cancel'
+        redirect_to posts_path
+      end
+    end
+    
 end
