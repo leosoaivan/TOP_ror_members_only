@@ -35,10 +35,4 @@ class PostsController < ApplicationController
       end
     end
 
-    def check_for_cancel
-      if params[:commit] == 'Cancel'
-        redirect_to posts_path
-      end
-    end
-    
 end

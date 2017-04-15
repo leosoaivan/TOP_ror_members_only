@@ -35,5 +35,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
-  
+
+  def check_for_cancel
+    if params[:commit] == 'Cancel'
+      redirect_to posts_path
+    end
+  end
+
 end

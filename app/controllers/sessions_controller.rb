@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :check_for_cancel, only: [:create]
   
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
