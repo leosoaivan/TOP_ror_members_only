@@ -31,10 +31,11 @@ TO-DO
 N/A
 
 ## Authors
-* **LPSV** 
+* LPSV
 
 ## License
 N/A
 
 ## Acknowledgments
 * The Odin Project
+* [Arun](https://github.com/arun1595)
